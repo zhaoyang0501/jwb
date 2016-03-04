@@ -30,6 +30,9 @@
 					<li><a href="${pageContext.request.contextPath}/admin/user/index"><i class="icon-pencil"></i>注册用户管理</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-pencil"></i>订单管理</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-pencil"></i>产品管理</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/category/index"><i class="icon-pencil"></i>保洁产品分类</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/project/create"><i class="icon-pencil"></i>保洁产品发布</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/project/index"><i class="icon-pencil"></i>保洁产品管理</a></li>
 					
 					
 					

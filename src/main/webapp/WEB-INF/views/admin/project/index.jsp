@@ -39,10 +39,10 @@
 					<div class="span12">
 						<div class="content-widgets ">
 							<div class="widget-head  bondi-blue" >
-								<h3>科研项目管理</h3>
+								<h3>保洁产品管理</h3>
 							</div>
 							<div class="box well form-inline">
-								<span>标题：</span>
+								<span>名称：</span>
 								<input type="text" id="_name" >
 								<a onclick="$.adminProject.initSearchDataTable()"
 									class="btn btn-info" data-loading-text="正在加载..."><i class="icon-search"></i>查询</a>
@@ -55,8 +55,9 @@
 										<tr>
 											<th >id</th>
 											<th >分类</th>
+											<th >名称</th>
 											<th >标题</th>
-											<th >申请人</th>
+											<th >价格</th>
 											<th >发布时间</th>
 											<th >操作</th>
 										</tr>

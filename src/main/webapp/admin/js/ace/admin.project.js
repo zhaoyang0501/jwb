@@ -53,9 +53,11 @@ jQuery.adminProject = {
 					}, {
 						"mDataProp" : "category.name"
 					}, {
+						"mDataProp" : "name"
+					}, {
 						"mDataProp" : "title"
 					},{
-						"mDataProp" : "user"
+						"mDataProp" : "price"
 					},{
 						"mDataProp" : "createDate"
 					},{
@@ -63,7 +65,7 @@ jQuery.adminProject = {
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [5],
+							'aTargets' : [6],
 							'fnRender' : function(oObj, sVal) {
 								return " <button class=\"btn2 btn-info\" onclick=\"$.adminProject.deleteproject("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
 							}

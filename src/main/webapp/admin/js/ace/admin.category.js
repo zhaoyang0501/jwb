@@ -51,8 +51,6 @@ jQuery.category = {
 					"aoColumns" : [{
 						"mDataProp" : "id"
 					}, {
-						"mDataProp" : "type"
-					}, {
 						"mDataProp" : "name"
 					},{
 						"mDataProp" : "remark"
@@ -62,23 +60,9 @@ jQuery.category = {
 						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
-							{
-								'aTargets' : [1],
-								'fnRender' : function(oObj, sVal) {
-									if(sVal=='10')
-										return "专家学者信息模块";
-									else if(sVal=='20')
-										return "科研项目模块";
-									else if(sVal=='30')
-										return "科研论文模块";
-									else if(sVal=='40')
-										return "专利文献模块";
-									else if(sVal=='50')
-										return "实验设备模块";
-								}
-							},
+							
 						{
-							'aTargets' : [5],
+							'aTargets' : [4],
 							'fnRender' : function(oObj, sVal) {
 								return" <button class=\"btn2 btn-info\" onclick=\"$.category.showEdit("+oObj.aData.id+")\"><i class=\"icon-edit\"></i> 修改</button>  <button class=\"btn2 btn-info\" onclick=\"$.category.deleteUser("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
 							}

@@ -47,7 +47,7 @@ public class CategoryService {
               public Predicate toPredicate(Root<Category> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
               Predicate predicate = cb.conjunction();
               if (name != null) {
-                   predicate.getExpressions().add(cb.like(root.get("type").as(String.class), "%"+name+"%"));
+                   predicate.getExpressions().add(cb.like(root.get("name").as(String.class), "%"+name+"%"));
               }
               return predicate;
               }

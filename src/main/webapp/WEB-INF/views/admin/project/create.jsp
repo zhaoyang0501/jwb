@@ -47,16 +47,32 @@
 					<div class="span12">
 						<div class="content-widgets light-gray">
 							<div class="widget-head  bondi-blue" >
-								<h3>科研项目发布</h3>
+								<h3>保洁产品介绍</h3>
 							</div>
 							
 							<div class="widget-container">
 								
 							<form action="${pageContext.request.contextPath}/admin/project/create" method="post" id=''>
+							
+								<div class="control-group">
+								<label for="title" class="control-label">名称：</label>
+								<div class="controls">
+									<input type="text" name="name" placeholder="">
+								</div>
+							</div>
+							
 							<div class="control-group">
 								<label for="title" class="control-label">标题：</label>
 								<div class="controls">
 									<input type="text" name="title" placeholder="">
+								</div>
+							</div>
+							
+							
+							<div class="control-group">
+								<label for="title" class="control-label">价格：</label>
+								<div class="controls">
+									<input type="text" name="price" placeholder="">
 								</div>
 							</div>
 							
@@ -72,20 +88,7 @@
 							</div>
 							
 							<div class="control-group">
-								<label for="title" class="control-label">申请人：</label>
-								<div class="controls">
-									<input type="text" name="user" placeholder="">
-								</div>
-							</div>
-							<div class="control-group">
-								<label for="title" class="control-label">申请单位：</label>
-								<div class="controls">
-									<input type="text" name="unit" placeholder="">
-								</div>
-							</div>
-							
-							<div class="control-group">
-								<label for="title" class="control-label">科研项目介绍：</label>
+								<label for="title" class="control-label">介绍：</label>
 								<div class="controls">
 									<textarea  id='context' name='remark' style="width: 100%;height: 600px"></textarea>
 								</div>

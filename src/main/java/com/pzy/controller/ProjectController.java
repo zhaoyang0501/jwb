@@ -32,7 +32,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Model model) {
-		model.addAttribute("categorys",categoryService.findByType("20"));
+		model.addAttribute("categorys",categoryService.findAll());
 		return "admin/project/create";
 	}
 	@RequestMapping("index")
