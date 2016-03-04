@@ -68,25 +68,113 @@
         </div>
       </section>
       
-      <section class="envor-section">
+     <section class="envor-section envor-single-product">
         <div class="container">
-          <div class="row" style="margin-bottom: 30px">
-          <div class='col-lg-12'>
-			<article >
-                  
-                <header>
-                  <h3 style="margin-top: 0px;"><i class="fa fa-pencil"></i> <span>${bean.title }</span> </h3>
-             
-                </header>
-               	 <p>申请时间：2016-01-12</p>
-                  <p>申请人：  ${bean.user }</p>
-                   <p>申请单位：  ${bean.unit }</p>
-             ${bean.remark }
-             
-             
-              </article>   
-          </div>
+          <div class="row" style="margin-top: 0px;">
+            <!--
+
+            Product start
+
+            //-->
+            <div class="col-lg-12">
+              <div class="row envor-margin-top-0" style="margin-top: 60px;">
+                <!--
+
+                Product images
+
+                //-->
+                <div class="col-lg-7">
+                  <div id="envor-project-images" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                      <li data-target="#envor-project-images" data-slide-to="0" class=""></li>
+                      <li data-target="#envor-project-images" data-slide-to="1" class=""></li>
+                      <li data-target="#envor-project-images" data-slide-to="2" class="active"></li>
+                      <li data-target="#envor-project-images" data-slide-to="3" class=""></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                      <div class="item">
+                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
+                        <div class="carousel-caption">
+                          Laptop
+                        </div>
+                      </div>
+                      <div class="item">
+                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
+                        <div class="carousel-caption">
+                          Laptop
+                        </div>
+                      </div>
+                      <div class="item active">
+                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
+                        <div class="carousel-caption">
+                          Laptop
+                        </div>
+                      </div>
+                      <div class="item">
+                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
+                        <div class="carousel-caption">
+                          Laptop
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#envor-project-images" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#envor-project-images" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                  </div>
+                </div>
+                <!--
+
+                Product description
+
+                //-->
+                <div class="col-lg-5">
+                  <h3 style="margin-top: 0px;">${bean.name }</h3>
+                  <p class="price">￥${bean.price }</p>
+                    <form class="envor-f1" action="doregister" method="post">
+                    <p><label for="rt1-fax">服务时间</label><input type="text"  name='tel'></p>
+                 <p><label for="rt1-fax">预约日期</label><input type="text"  name='tel'></p>
+               
+                  <p><label for="rt1-fax">备注</label><input type="text"  name='grade'></p>
+                  <p><label for="rt1-fax">服务地址</label><input type="text"  name='address'></p>
+                  <p><input type="submit" value="立即注册" class="envor-btn envor-btn-normal envor-btn-primary"></p>
+                </form>
+                   </div>
+              </div>
+              <div class="row envor-margin-top-0" style="margin-top: 60px;">
+                <!--
+
+                Product Details
+
+                //-->
+                <div class="col-lg-12">
+                  <h3 class="h3-2" style="margin-top: 0px;">product details</h3>
+                  <div>
+                  ${bean.remark }
+                  </div>
+                </div>
+              <!--
+
+              Product end
+
+              //-->
+              </div>
+            </div>
+            
+            </div>
         </div>
+        </div>
+      <!--
+
+      Main Content start
+
+      //-->
       </section>
     </div>
     
