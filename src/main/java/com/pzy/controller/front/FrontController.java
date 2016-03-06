@@ -104,6 +104,14 @@ public class FrontController {
 	 * 注册连接
 	 * @return
 	 */
+	@RequestMapping("about")
+	public String about() {
+		return "about";
+	}
+	/***
+	 * 注册连接
+	 * @return
+	 */
 	@RequestMapping("center")
 	public String center() {
 		return "center";
