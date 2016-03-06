@@ -93,4 +93,16 @@ public class ProjectService {
 		public void save(Project project){
 			projectRepository.save(project);
 		}
+		public List<Project> findBycategory(final Long id){
+	         Specification<Project> spec = new Specification<Project>() {
+	              public Predicate toPredicate(Root<Project> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+	              Predicate predicate = cb.conjunction();
+	              if (id != null) {
+	                   predicate.getExpressions().add(cb.equal(root.get("category").get("id").as(Long.class), id));
+	              }
+	              return predicate;
+	              }
+	         };
+	         return  projectRepository.findAll(spec);
+	    }
 }

@@ -14,7 +14,7 @@
     <meta name="author" content="Suono Libero ( @rivathemes.com )">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <title>Envor HTML5/CSS3 Template</title>
+    <title></title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -24,10 +24,8 @@
     <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/colorbox-skins/4/colorbox.css" type="text/css">
         <link href="css/main.css" rel="stylesheet" type="text/css">
-   
-     <link href=" http://demo.htmleaf.com/1503/201503041714/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
-    <link href=" http://demo.htmleaf.com/1503/201503041714/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
-  
+    
+
     <link href="css/header/h1.css" rel="stylesheet" type="text/css">
     <link href="css/responsive.css" rel="stylesheet" type="text/css">
     <link href="css/color1.css" rel="stylesheet" type="text/css" id="envor-site-color">
@@ -44,9 +42,13 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-     <script src="http://demo.htmleaf.com/1503/201503041714/js/bootstrap-datetimepicker.js"></script>
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <style type="text/css">
+    #fuckyou{
+    	margin-top: 0px!important; 
+    }
+    </style>
   </head>
 
     <body>
@@ -55,7 +57,6 @@
     <!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-   
    	<%@include file="./header.jsp" %>
    
    <div class="envor-content" style="padding-top: 0px;">
@@ -64,134 +65,62 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="envor-desktop-breadscrubs-inner">
-                <a href="index.html">首页</a><i class="fa fa-angle-double-right"></i>科研项目
+                <a href="index.html">首页</a><i class="fa fa-angle-double-right"></i>个人中心
               </div>
             </div>
           </div>
         </div>
       </section>
       
-     <section class="envor-section envor-single-product">
+      <section class="envor-section">
         <div class="container">
-         <c:if test="${tip!=null }">
-      <div class="envor-msg envor-msg-info">
-                <header>
-                	  提示!
-                  <i class="fa fa-times"></i>
-                </header>
-                <p>${tip }</p>
-          </div>
-      </c:if>
-          <div class="row" style="margin-top: 0px;">
-            <!--
-
-            Product start
-
-            //-->
-            <div class="col-lg-12">
-              <div class="row envor-margin-top-0" style="margin-top: 60px;">
-                <!--
-
-                Product images
-
-                //-->
-                <div class="col-lg-7">
-                  <div id="envor-project-images" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                      <li data-target="#envor-project-images" data-slide-to="0" class=""></li>
-                      <li data-target="#envor-project-images" data-slide-to="1" class=""></li>
-                      <li data-target="#envor-project-images" data-slide-to="2" class="active"></li>
-                      <li data-target="#envor-project-images" data-slide-to="3" class=""></li>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                      <div class="item">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
-                        <div class="carousel-caption">
-                          Laptop
-                        </div>
-                      </div>
-                      <div class="item">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
-                        <div class="carousel-caption">
-                          Laptop
-                        </div>
-                      </div>
-                      <div class="item active">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
-                        <div class="carousel-caption">
-                          Laptop
-                        </div>
-                      </div>
-                      <div class="item">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
-                        <div class="carousel-caption">
-                          Laptop
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#envor-project-images" data-slide="prev">
-                      <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#envor-project-images" data-slide="next">
-                      <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                  </div>
-                </div>
-                <!--
-
-                Product description
-
-                //-->
-                <div class="col-lg-5">
-                  <h3 style="margin-top: 0px;">${bean.name }</h3>
-                  <p class="price">￥${bean.price }</p>
-                    <form class="envor-f1" action="submitorder" method="post">
-                    <input type="hidden"  name='pid' value='${bean.id }'>
-                    <p><label for="rt1-fax">服务时间</label><input type="text"  name='orderTime'></p>
-                 <p><label for="rt1-fax">预约日期</label><input type="text"  id='orderDate' name='orderDate'></p>
-               
-                  <p><label for="rt1-fax">备注</label><input type="text"  name='remark'></p>
-                  <p><label for="rt1-fax">服务地址</label><input type="text"  name='addr'></p>
-                  <p><input type="submit" value="提交订单" class="envor-btn envor-btn-normal envor-btn-primary"></p>
-                </form>
-                   </div>
-              </div>
-              <div class="row envor-margin-top-0" style="margin-top: 60px;">
-                <!--
-
-                Product Details
-
-                //-->
-                <div class="col-lg-12">
-                  <h3 class="h3-2" style="margin-top: 0px;">product details</h3>
-                  <div>
-                  ${bean.remark }
-                  </div>
-                </div>
-              <!--
-
-              Product end
-
-              //-->
-              </div>
-            </div>
+          <div class="row" style="margin-bottom: 30px">
+           <div class="col-lg-3 col-md-3">
+              	<nav class="envor-side-navi">
+                <ul>
+                   <li ><i class="glyphicon glyphicon-arrow-right"></i> <a href="center">个人信息</a></li>
+                  <li  class="active" ><i class="glyphicon glyphicon-arrow-right"></i> <a href="myorder">我的订单</a></li>
+                
+                </ul>
+              </nav>
+            </div>	
             
+          <div class="col-lg-9 col-md-9">
+			<table class="table table-bordered">
+			<thead>
+				<tr>
+					   <th>服务名称</th>
+					   <th>订单时间</th>
+						<th>单价</th>
+						<th>总价</th>
+						<th>地址</th>
+						<th>状态</th>
+						<th></th>
+				 </tr>
+			</thead>
+			<tbody>
+			<c:forEach items="${orders }" var="bean">
+				<tr>
+						<th>${bean.project.name }</th>
+						<th>${bean.orderDate }</th>
+						<th>${bean.price }</th>
+						<th>${bean.toalprice }</th>
+						<th>${bean.addr }</th>
+						<th><span class="label label-success">${bean.state }</span></th>
+							<th><a href="">取消订单</a></th>
+				 </tr>
+			</c:forEach>
+				
+			</tbody>
+			</table>
             </div>
+		  </div>
         </div>
-        </div>
-      <!--
-
-      Main Content start
-
-      //-->
       </section>
     </div>
     
 	<%@include file="./footer.jsp" %>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -218,26 +147,6 @@
     <script src="js/layerslider/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
     <script src="js/jquery.rivathemes.js"></script>
     <script type="text/javascript">
-    $('document').ready(function() {
-        /*
-
-        Sorting
-
-        */
-        $('#faq-sorting').rivaSorting({
-          showAll : 1
-        });
-        /*
-
-        Footer News Slider
-
-        */
-        $('#footer-news').rivaSlider({
-          visible : 1,
-          selector : 'envor-post-preview'
-        });
-    });
-
       $('document').ready(function() {
           /*
 
@@ -318,6 +227,7 @@
       });
       /*
 
+     
       Windows Phone 8 и Internet Explorer 10
 
       */

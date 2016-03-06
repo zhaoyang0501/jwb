@@ -74,11 +74,7 @@
               	<nav class="envor-side-navi">
                 <ul>
                   <li  class="active"><i class="glyphicon glyphicon-arrow-right"></i> <a href="center">个人信息</a></li>
-                  <li ><i class="glyphicon glyphicon-arrow-right"></i> <a href="mygrade">我参加的班级</a></li>
-                   <li><i class="glyphicon glyphicon-arrow-right"></i> <a href="mywork">我的就业情况</a></li>
-                  <li><i class="glyphicon glyphicon-arrow-right"></i> <a href="myscore">我的成绩查询</a></li>
-                  <li><i class="glyphicon glyphicon-arrow-right"></i> <a href="myattence">我的考勤</a></li>
-                
+                  <li ><i class="glyphicon glyphicon-arrow-right"></i> <a href="myorder">我的订单</a></li>
                 </ul>
               </nav>
             </div>	

@@ -1,19 +1,25 @@
 package com.pzy.controller.front;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pzy.entity.Category;
 import com.pzy.entity.Expert;
 import com.pzy.entity.Lab;
 import com.pzy.entity.News;
+import com.pzy.entity.Order;
 import com.pzy.entity.Paper;
 import com.pzy.entity.Patent;
 import com.pzy.entity.Project;
@@ -25,6 +31,7 @@ import com.pzy.service.ExpertService;
 import com.pzy.service.GradeService;
 import com.pzy.service.LabService;
 import com.pzy.service.NewsService;
+import com.pzy.service.OrderService;
 import com.pzy.service.PaperService;
 import com.pzy.service.PatentService;
 import com.pzy.service.ProjectService;
@@ -73,6 +80,13 @@ public class FrontController {
 	private PatentService patentService;
 	@Autowired
 	private LabService labService;
+	
+	@Autowired
+	private OrderService orderService;
+	@InitBinder  
+	protected void initBinder(HttpServletRequest request,   ServletRequestDataBinder binder) throws Exception {   
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true)); 
+	}  
 	/***
 	 * 跳转到首页
 	 * @param model
@@ -85,8 +99,25 @@ public class FrontController {
 		return "index";
 	}
 	
-	
-	
+
+	/***
+	 * 注册连接
+	 * @return
+	 */
+	@RequestMapping("center")
+	public String center() {
+		return "center";
+	}
+	/***
+	 * 我的订单
+	 * @return
+	 */
+	@RequestMapping("myorder")
+	public String myorder(Model model,HttpSession httpSession) {
+		User user=(User)httpSession.getAttribute("user");
+		model.addAttribute("orders",orderService.findByUser(user));
+		return "myorder";
+	}
 	/***
 	 * 注册连接
 	 * @return
@@ -156,16 +187,6 @@ public class FrontController {
 		model.addAttribute("grades", gradeService.findAll());
 		return "report";
 	}
-	/***
-	 * 教师风采
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("teacher")
-	public String teacher(Model model) {
-		model.addAttribute("teachers",teacherService.findAll());
-		return "teacher";
-	}
 	
 	/***
 	 * 执行登陆动作
@@ -197,12 +218,13 @@ public class FrontController {
 	 */
 	@RequestMapping("project")
 	public String project(Model model,String key,Long cid) {
-		model.addAttribute("cagegorys", categoryService.findByType("20"));
+		model.addAttribute("cagegorys", categoryService.findAll());
 		Category category=null;
 		if(cid!=null)
 			category=categoryService.find(cid);
-		List<Project> list= projectService.findAll(1, 20, key,category).getContent();
+		List<Project> list= projectService.findBycategory(cid);
 		model.addAttribute("projects",list);
+		model.addAttribute("category",category);
 		return "project";
 	}
 	
@@ -212,89 +234,17 @@ public class FrontController {
 		return "viewproject";
 	}
 	
-	
-	/***
-	 *专家学者
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("expert")
-	public String expert(Model model,String key,Long cid) {
-		model.addAttribute("cagegorys", categoryService.findByType("10"));
-		Category category=null;
-		if(cid!=null)
-			category=categoryService.find(cid);
-		List<Expert> list= expertService.findAll(1, 20, key,category).getContent();
-		model.addAttribute("experts",list);
-		return "expert";
+	@RequestMapping("submitorder")
+	public String submitorder(Model model,Long pid,Order order) {
+		Project bean=projectService.find(pid);
+		order.setCreateDate(new Date());
+		order.setState("待审核");
+		order.setProject(bean);
+		orderService.save(order);
+		model.addAttribute("bean",bean);
+		model.addAttribute("tip","订单提交成功等待处理");
+		return "viewproject";
 	}
 	
-	@RequestMapping("viewexpert")
-	public String viewexpert(Long id,Model model) {
-		model.addAttribute("bean",expertService.find(id));
-		return "viewexpert";
-	}
-	
-	/***
-	 *文献资料
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("paper")
-	public String paper(Model model,String key,Long cid) {
-		model.addAttribute("cagegorys", categoryService.findByType("30"));
-		Category category=null;
-		if(cid!=null)
-			category=categoryService.find(cid);
-		List<Paper> list= paperService.findAll(1, 20, key,category).getContent();
-		model.addAttribute("papers",list);
-		return "paper";
-	}
-	
-	@RequestMapping("viewpaper")
-	public String viewpaper(Long id,Model model) {
-		model.addAttribute("bean",paperService.find(id));
-		return "viewpaper";
-	}
-	
-	/***
-	 *专利文献
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("patent")
-	public String patent(Model model,String key,Long cid) {
-		model.addAttribute("cagegorys", categoryService.findByType("40"));
-		Category category=null;
-		if(cid!=null)
-			category=categoryService.find(cid);
-		List<Patent> list= patentService.findAll(1, 20, key,category).getContent();
-		model.addAttribute("patents",list);
-		return "patent";
-	}
-	
-	@RequestMapping("viewpatent")
-	public String viewpatent(Long id,Model model) {
-		model.addAttribute("bean",patentService.find(id));
-		return "viewpatent";
-	}
-	
-	
-	@RequestMapping("lab")
-	public String lab(Model model,String key,Long cid) {
-		model.addAttribute("cagegorys", categoryService.findByType("50"));
-		Category category=null;
-		if(cid!=null)
-			category=categoryService.find(cid);
-		List<Lab> list= labService.findAll(1, 20, key,category).getContent();
-		model.addAttribute("labs",list);
-		return "lab";
-	}
-	
-	@RequestMapping("viewlab")
-	public String viewlab(Long id,Model model) {
-		model.addAttribute("bean",labService.find(id));
-		return "viewlab";
-	}
 }
 

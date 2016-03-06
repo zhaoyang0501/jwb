@@ -44,6 +44,12 @@
     <![endif]-->
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    
+    <style type="text/css">
+    .active a{
+    color: white;
+    }
+    </style>
   </head>
 
     <body>
@@ -61,66 +67,94 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="envor-desktop-breadscrubs-inner">
-                <a href="index.html">首页</a><i class="fa fa-angle-double-right"></i>科研项目
+                <a href="index.html">首页</a><i class="fa fa-angle-double-right"></i>在线预约
               </div>
             </div>
           </div>
         </div>
       </section>
       
-      <section class="envor-section">
+ 
+ <section class="envor-section">
         <div class="container">
-           <div class="row" style="margin-bottom: 30px">
-           
-           <div class="col-lg-3">
-            <aside class="envor-widget envor-category-widget">
-              <h3> 分类</h3>
-              <div class="envor-widget-inner">
-                <ul>
-	                <c:forEach var="bean" items="${cagegorys }">
-	                	 <li>
-	                   	 	<p><a href="project?cid=${bean.id }"><i class="glyphicon glyphicon-folder-open"></i>${bean.name }</a> <a ><i class="fa fa-rss"></i></a></p>
-	                 	 	<small>${bean.remark }</small>
-	                 	 </li>
-	                </c:forEach>
-                </ul>
+          <div class="row" style="margin-top: 0px;">
+            <div class="col-lg-12">
+              <p class="block-description">家务帮的会员服务</p>
+              <p>加入家务帮会员，您还享受专属的家庭管家1对1服务，更有优先安排、更换阿姨、福利赠送等各种特权。</p>
+              <div class="envor-sorting" id="portfolio-sorting">
+                <!--
+
+                Filters
+
+                //-->
+
+                <div class="envor-sorting-filters"><span  id='span_all' data-value="*" 
+                ${category==null?"class='active'":"" }
+                ><a  href="project">全部</a> </span>
+                 <c:forEach items="${cagegorys }" var="bean">
+                   <span data-value="html" id='span_${bean.id }'><a  href="project?cid=${bean.id }">${bean.name }</a> </span>
+                 </c:forEach>
+                </div>
+                <!--
+
+                Items To Sort start
+
+                //-->
+                <div class="row" style="margin-top: 60px;">
+                  <div class="col-lg-12">
+                  <div class="envor-projects-listing envor-projects-listing-5-cols" style="margin-left: -30px; width: 1170px;">
+					
+					<c:forEach items="${projects }" var="bean">
+						<article class="envor-project envor-padding-bottom-30 envor-padding-left-30 javascript html envor-sorting-item envor-listing-item" style="width: 234px;">
+		                      <div class="envor-project-inner">
+		                        <figure><a href=""><img src="http://www.jiawubang.me/Uploads/Picture/2015/05/29/JWB.XQytgb47c6ba5b22Zc6J.jpg_280_200.jpg" alt=""></a><figcaption style="display: none;"><a href="http://www.jiawubang.me/Uploads/Picture/2015/05/29/JWB.XQytgb47c6ba5b22Zc6J.jpg_280_200.jpg" title="Morbi sagittis lacinia" class="colorbox cboxElement"><i class="fa fa-plus" style="top: 0px;"></i></a></figcaption></figure>
+		                        <div class="envor-project-details">
+		                         <p class="link"><a href="viewproject?id=${bean.id }">${bean.name }</a></p>
+		                          <p class="filter" ><h3 style="color: red">${bean.price }元/小时</h3></p>
+		                        </div>
+		                      </div>
+                   		 </article>
+					</c:forEach>
+					
+                    
+                    
+                   
+                  </div>
               </div>
-            </aside>
-          
+              </div>
+            <!--
+
+            Items To Sort end
+
+            //-->
             </div>
-           
-           
-           		<div class="col-lg-9">
-	           		<div style="float: right;padding-bottom: 20px">
-	           		<form action="project" method="post">
-	           			<input type="text"  name='key' placeholder="输入标题、正文、申请人查找">
-              			<input type="submit" value="查找" class="envor-btn envor-btn-normal envor-btn-primary">
-	           		</form>
-	           		</div>
-           			<table class="table table-bordered">
-						<thead>
-							<tr>
-									<th>标题</th>
-									<th>发表日期</th>
-									<th>查看</th>
-							 </tr>
-						</thead>
-						<tbody>
-						<c:forEach items="${projects }" var="bean">
-						<tr>
-									<th><a href="viewproject?id=${bean.id }">${bean.title }</a> <img src="http://www.bjsxt.com/statics/images/bjsxt/kb_new.gif" style="opacity: 1;"></th>
-									<th>  <fmt:formatDate value="${bean.createDate }" pattern="yyyy-MM-dd"/> </th>
-									<th><a  href="viewproject?id=${bean.id }"><span class="label label-success">详情</span></a></th>
-							 </tr>
-						</c:forEach>
-						</tbody>
-						</table>
-		        </div>
-			</div> 
-			
-			
+            <!--
+
+            pagination start
+
+            //-->
+            <div class="envor-pagination">
+              <span class="page-numbers current">1</span>
+              <a class="page-numbers" href="">2</a>
+              <a class="page-numbers" href="">3</a>
+              <a class="next page-numbers" href="">Next »</a>
+            <!--
+
+            pagination end
+
+            //-->
+            </div>
+          </div>
         </div>
+        </div>
+      <!--
+
+      Main Content start
+
+      //-->
       </section>
+ 
+ 
     </div>
     
 	<%@include file="./footer.jsp" %>
@@ -151,6 +185,7 @@
     <script src="js/jquery.rivathemes.js"></script>
     <script type="text/javascript">
       $('document').ready(function() {
+    	  $("#span_${category.id}").addClass("active");
           /*
 
           Home Page Layer Slider

@@ -85,10 +85,10 @@
                       <a href="index">首页</a>
                     </li>
                     <li>
-                      <a href="expert">在线预约</a>
+                      <a href="project">在线预约</a>
                     </li>
                       <li>
-                      <a href="project">个人中心</a>
+                      <a href="center">个人中心</a>
                     </li>
                     <li>
                       <a href="paper">关于我们</a>
