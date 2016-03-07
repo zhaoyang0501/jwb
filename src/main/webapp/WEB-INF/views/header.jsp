@@ -91,7 +91,7 @@
                       <a href="center">个人中心</a>
                     </li>
                     <li>
-                      <a href="paper">关于我们</a>
+                      <a href="about">关于我们</a>
                     </li>
                      <li>
                       <a href="register">加入会员</a>

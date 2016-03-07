@@ -74,6 +74,15 @@
       
       <section class="envor-section">
         <div class="container">
+         <c:if test="${tip!=null }">
+      <div class="envor-msg envor-msg-info">
+                <header>
+                	  提示!
+                  <i class="fa fa-times"></i>
+                </header>
+                <p>${tip }</p>
+          </div>
+      </c:if>
           <div class="row" style="margin-bottom: 30px">
            <div class="col-lg-3 col-md-3">
               	<nav class="envor-side-navi">
@@ -106,8 +115,15 @@
 						<th>${bean.price }</th>
 						<th>${bean.toalprice }</th>
 						<th>${bean.addr }</th>
-						<th><span class="label label-success">${bean.state }</span></th>
-							<th><a href="">取消订单</a></th>
+						<th>
+						<c:if test="${bean.state=='已取消' }">
+						<span class="label label-danger">${bean.state }</span>
+						</c:if>
+						<c:if test="${bean.state!='已取消' }">
+							<span class="label label-success">${bean.state }</span>
+						</c:if>
+						</th>
+							<th><a href="deleteorder?id=${bean.id }">取消订单</a></th>
 				 </tr>
 			</c:forEach>
 				

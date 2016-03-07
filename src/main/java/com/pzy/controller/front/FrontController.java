@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pzy.entity.Category;
@@ -126,6 +127,19 @@ public class FrontController {
 		model.addAttribute("orders",orderService.findByUser(user));
 		return "myorder";
 	}
+	
+	@RequestMapping("deleteorder")
+	public String deleteorder( Long id,Model model,HttpSession httpSession) {
+		Order order=orderService.find(id);
+		order.setState("已取消");
+		orderService.save(order);
+		User user=(User)httpSession.getAttribute("user");
+		model.addAttribute("orders",orderService.findByUser(user));
+		model.addAttribute("tip", "订单取消成功！");
+		return "myorder";
+	}
+	
+	
 	/***
 	 * 注册连接
 	 * @return
@@ -243,12 +257,21 @@ public class FrontController {
 	}
 	
 	@RequestMapping("submitorder")
-	public String submitorder(Model model,Long pid,Order order) {
+	public String submitorder(Model model,Long pid,Order order,HttpSession httpSession) {
+		User user=	(User)httpSession.getAttribute("user");
+		if(user==null){
+			model.addAttribute("tip","请登录!");
+    		return "login";
+		}
 		Project bean=projectService.find(pid);
 		order.setCreateDate(new Date());
 		order.setState("待审核");
 		order.setProject(bean);
+		order.setUser(user);
+		order.setPrice(bean.getPrice());
+		order.setToalprice(bean.getPrice()*Long.valueOf(order.getOrderTime()));
 		orderService.save(order);
+		
 		model.addAttribute("bean",bean);
 		model.addAttribute("tip","订单提交成功等待处理");
 		return "viewproject";

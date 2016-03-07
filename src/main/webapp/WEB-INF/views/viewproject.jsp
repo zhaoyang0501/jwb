@@ -64,7 +64,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="envor-desktop-breadscrubs-inner">
-                <a href="index.html">首页</a><i class="fa fa-angle-double-right"></i>科研项目
+                <a href="index.html">首页</a><i class="fa fa-angle-double-right"></i>家务预约
               </div>
             </div>
           </div>
@@ -95,38 +95,24 @@
                 Product images
 
                 //-->
-                <div class="col-lg-7">
+                <div class="col-lg-3">
                   <div id="envor-project-images" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                       <li data-target="#envor-project-images" data-slide-to="0" class=""></li>
-                      <li data-target="#envor-project-images" data-slide-to="1" class=""></li>
-                      <li data-target="#envor-project-images" data-slide-to="2" class="active"></li>
-                      <li data-target="#envor-project-images" data-slide-to="3" class=""></li>
+                      <li data-target="#envor-project-images" data-slide-to="1" class="active"></li>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                       <div class="item">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
-                        <div class="carousel-caption">
-                          Laptop
-                        </div>
-                      </div>
-                      <div class="item">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
+                        <a href="http://www.jiawubang.me/Uploads/Picture/2015/06/10/JWB.ESiVw38b02a95b33szDN.jpg_280_200.jpg" class="colorbox cboxElement"><img src="http://www.jiawubang.me/Uploads/Picture/2015/06/10/JWB.ESiVw38b02a95b33szDN.jpg_280_200.jpg" alt=""></a>
                         <div class="carousel-caption">
                           Laptop
                         </div>
                       </div>
                       <div class="item active">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
-                        <div class="carousel-caption">
-                          Laptop
-                        </div>
-                      </div>
-                      <div class="item">
-                        <a href="img/img1.png" class="colorbox cboxElement"><img src="img/img1.png" alt=""></a>
+                        <a href="http://www.jiawubang.me/Uploads/Picture/2015/06/10/JWB.VsOpd84711f2b12NmUpH.jpg_280_200.jpg" class="colorbox cboxElement"><img src="http://www.jiawubang.me/Uploads/Picture/2015/06/10/JWB.VsOpd84711f2b12NmUpH.jpg_280_200.jpg" alt=""></a>
                         <div class="carousel-caption">
                           Laptop
                         </div>
@@ -146,7 +132,7 @@
                 Product description
 
                 //-->
-                <div class="col-lg-5">
+                <div class="col-lg-9">
                   <h3 style="margin-top: 0px;">${bean.name }</h3>
                   <p class="price">￥${bean.price }</p>
                     <form class="envor-f1" action="submitorder" method="post">
