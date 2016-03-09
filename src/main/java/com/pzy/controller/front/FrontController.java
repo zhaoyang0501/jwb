@@ -13,35 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pzy.entity.Category;
-import com.pzy.entity.Expert;
-import com.pzy.entity.Lab;
-import com.pzy.entity.News;
 import com.pzy.entity.Order;
-import com.pzy.entity.Paper;
-import com.pzy.entity.Patent;
 import com.pzy.entity.Project;
-import com.pzy.entity.Report;
 import com.pzy.entity.User;
-import com.pzy.service.AttenceService;
 import com.pzy.service.CategoryService;
-import com.pzy.service.ExpertService;
-import com.pzy.service.GradeService;
-import com.pzy.service.LabService;
-import com.pzy.service.NewsService;
 import com.pzy.service.OrderService;
-import com.pzy.service.PaperService;
-import com.pzy.service.PatentService;
 import com.pzy.service.ProjectService;
-import com.pzy.service.ReportService;
-import com.pzy.service.ScoreService;
-import com.pzy.service.TeacherService;
-import com.pzy.service.TimetableService;
 import com.pzy.service.UserService;
-import com.pzy.service.WorkService;
 /***
  * 前台，首页各种连接登陆等
  * @author qq:263608237
@@ -53,35 +34,11 @@ public class FrontController {
 	
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private GradeService gradeService;
-	@Autowired
-	private TimetableService timetableService;
-	@Autowired
-	private ReportService reportService;
-	@Autowired
-	private WorkService workService;
-	@Autowired
-	private ScoreService scoreService;
-	@Autowired
-	private AttenceService attenceService;
-	@Autowired
-	private TeacherService teacherService;
-	@Autowired
-	private NewsService newsService;
+	
 	@Autowired
 	private CategoryService categoryService;
 	@Autowired
 	private ProjectService projectService;
-	@Autowired
-	private ExpertService expertService;
-	@Autowired
-	private PaperService paperService;
-	@Autowired
-	private PatentService patentService;
-	@Autowired
-	private LabService labService;
-	
 	@Autowired
 	private OrderService orderService;
 	@InitBinder  
@@ -95,14 +52,12 @@ public class FrontController {
 	 */
 	@RequestMapping("index")
 	public String index(Model model) {
-		List<News> news= newsService.findAll();
-		model.addAttribute("news", news.size()==0?null:news.get(0));
 		return "index";
 	}
 	
 
 	/***
-	 * 注册连接
+	 * 关于我们
 	 * @return
 	 */
 	@RequestMapping("about")
@@ -127,7 +82,13 @@ public class FrontController {
 		model.addAttribute("orders",orderService.findByUser(user));
 		return "myorder";
 	}
-	
+	/***
+	 * 取消订单
+	 * @param id
+	 * @param model
+	 * @param httpSession
+	 * @return
+	 */
 	@RequestMapping("deleteorder")
 	public String deleteorder( Long id,Model model,HttpSession httpSession) {
 		Order order=orderService.find(id);
@@ -178,37 +139,10 @@ public class FrontController {
 	@RequestMapping("loginout")
 	public String loginout(HttpSession httpSession,Model model) {
 		httpSession.removeAttribute("user");
-		List<News> news= newsService.findAll();
-		model.addAttribute("news", news.size()==0?null:news.get(0));
 		return "index";
 	}
 	
-	/***
-	 * 报名连接
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("report")
-	public String report(Model model) {
-		model.addAttribute("grades", gradeService.findAll());
-		return "report";
-	}
-	/***
-	 * 点击报名
-	 * @param model
-	 * @param report
-	 * @param httpSession
-	 * @return
-	 */
-	@RequestMapping("doreport")
-	public String doreport(Model model,Report report,HttpSession httpSession) {
-		report.setCreateDate(new Date());
-		report.setUser((User)httpSession.getAttribute("user"));
-		reportService.save(report);
-		model.addAttribute("tip","报名成功!");
-		model.addAttribute("grades", gradeService.findAll());
-		return "report";
-	}
+	
 	
 	/***
 	 * 执行登陆动作
@@ -221,8 +155,6 @@ public class FrontController {
 	public String dologin(User user,HttpSession httpSession,Model model) {
 		User loginuser=userService.login(user.getUsername(), user.getPassword());
     	if(loginuser!=null){
-    		List<News> news= newsService.findAll();
-    		model.addAttribute("news", news.size()==0?null:news.get(0));
     		httpSession.setAttribute("user", loginuser);
             return "index"; 
     	}
@@ -234,7 +166,7 @@ public class FrontController {
 	}
 	
 	/***
-	 *科研项目
+	 *家务帮列表
 	 * @param model
 	 * @return
 	 */
@@ -249,13 +181,25 @@ public class FrontController {
 		model.addAttribute("category",category);
 		return "project";
 	}
-	
+	/**
+	 * 查看产品列表
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("viewproject")
 	public String viewproject(Long id,Model model) {
 		model.addAttribute("bean",projectService.find(id));
 		return "viewproject";
 	}
-	
+	/***
+	 * 提交订单
+	 * @param model
+	 * @param pid
+	 * @param order
+	 * @param httpSession
+	 * @return
+	 */
 	@RequestMapping("submitorder")
 	public String submitorder(Model model,Long pid,Order order,HttpSession httpSession) {
 		User user=	(User)httpSession.getAttribute("user");
@@ -271,7 +215,6 @@ public class FrontController {
 		order.setPrice(bean.getPrice());
 		order.setToalprice(bean.getPrice()*Long.valueOf(order.getOrderTime()));
 		orderService.save(order);
-		
 		model.addAttribute("bean",bean);
 		model.addAttribute("tip","订单提交成功等待处理");
 		return "viewproject";

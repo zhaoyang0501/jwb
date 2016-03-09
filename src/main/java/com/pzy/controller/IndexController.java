@@ -1,7 +1,5 @@
 package com.pzy.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.pzy.entity.News;
 import com.pzy.entity.User;
-import com.pzy.service.NewsService;
-import com.pzy.service.TeacherService;
 import com.pzy.service.UserService;
 /***
  * 后台首页，处理后台登录验证权限等操作
@@ -25,10 +20,7 @@ public class IndexController {
 	
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private NewsService newsService;
-	@Autowired
-	private TeacherService teacherService;
+	
 	@RequestMapping("center/index")
 	public String center() {
 		return "admin/center/index";
@@ -85,17 +77,13 @@ public class IndexController {
 	@RequestMapping("gologin")
 	public String gologin(HttpSession httpSession,String userName,String password,Model model)  {
 		User user=userService.login(userName, password);
-		List<News> list=newsService.findAll();
 		model.addAttribute("usernum",userService.findAll().size());
-		model.addAttribute("num1",teacherService.findAll().size());
+		model.addAttribute("num1",0);
     	if("admin".equals(userName)&&"123456".equals(password)){
     		User admin=new User();  
     		admin.setUsername("admin");
     		admin.setPassword("123456");
     		admin.setName("超级管理员");
-    		
-    		
-    		model.addAttribute("news",list.size()==0?new News():list.get(0));
     		httpSession.setAttribute("adminuser", admin);
     		return "admin/index";
     	}
@@ -104,9 +92,6 @@ public class IndexController {
     		admin.setUsername("work");
     		admin.setPassword("123456");
     		admin.setName("企业账号");
-    		
-    		
-    		model.addAttribute("news",list.size()==0?new News():list.get(0));
     		httpSession.setAttribute("adminuser", admin);
     		return "admin/index";
     	}
