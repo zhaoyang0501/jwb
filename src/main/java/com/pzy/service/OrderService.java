@@ -1,6 +1,7 @@
 
 package com.pzy.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -50,6 +51,29 @@ public class OrderService {
          return (List<Order>) orderRepository.findAll(spec);
      }
      
+     public Page<Order> findAll(final int pageNumber, final int pageSize,final String name,final Date s,final Date e,final String state){
+         PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
+         Specification<Order> spec = new Specification<Order>() {
+              public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+              Predicate predicate = cb.conjunction();
+              if (name != null) {
+                   predicate.getExpressions().add(cb.like(root.get("user").get("name").as(String.class), "%"+name+"%"));
+              }
+              if (s!=null) {
+                  predicate.getExpressions().add(cb.greaterThanOrEqualTo(root.get("orderDate").as(Date.class), s));
+              }
+              if (e!=null) {
+                  predicate.getExpressions().add(cb.lessThanOrEqualTo(root.get("orderDate").as(Date.class), s));
+               }
+              if (state!=null) {
+                  predicate.getExpressions().add(cb.equal(root.get("state").as(String.class), state));
+               }
+              return predicate;
+              }
+         };
+         Page<Order> result = (Page<Order>) orderRepository.findAll(spec, pageRequest);
+         return result;
+     	}
      public Page<Order> findAll(final int pageNumber, final int pageSize,final String name){
          PageRequest pageRequest = new PageRequest(pageNumber - 1, pageSize, new Sort(Direction.DESC, "id"));
          Specification<Order> spec = new Specification<Order>() {

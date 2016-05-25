@@ -13,7 +13,7 @@
 	<div class="container" style="margin-top:100px">
 		<div class="span12 login-header">
 		<h4 style="color:red; text-align: center;">${tip }</h4>
-		<h1 style="text-align: center;">欢迎登录家务帮后台管理系统</h1>
+		<h1 style="text-align: center;">欢迎登录家政服务网后台管理系统</h1>
 		</div>
 		<form  style=" margin-top:100px; border: 1px solid #115928;" class="form-signin-ribbon" action="${pageContext.request.contextPath}/admin/gologin" method="post">
 				<div class="content">
@@ -25,7 +25,10 @@
 						<i class=" icon-key"></i><input type="password" id="password" name="password" class="input-block-level" data-placeholder="密码">
 					</div>
 					<div class="input-prepend">
-					<label class="remember" for="remember"><input type="checkbox" id="_spring_security_remember_me" name="_spring_security_remember_me" checked="true"/>记住我</label>
+					<select name="role">
+						<option value="管理员">管理员</option>
+						<option value="员工">员工</option>
+					</select>
 					</div>
 					<button class="btn btn-block" type="submit">登 陆</button>
 				</div>

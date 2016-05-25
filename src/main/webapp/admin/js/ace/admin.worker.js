@@ -1,8 +1,8 @@
-jQuery.work = {
-		userDataTable:null,
+jQuery.adminWorker = {
+		workerDataTable:null,
 		initSearchDataTable : function() {
-			if (this.userDataTable == null) {
-				this.userDataTable = $('#dt_table_view').dataTable({
+			if (this.workerDataTable == null) {
+				this.workerDataTable = $('#dt_table_view').dataTable({
 					"sDom" : "<'row-fluid'<'span6'l>r>t<'row-fluid'<'span6'i><'span6'p>>",
 					"sPaginationType" : "bootstrap",
 					"oLanguage" : {
@@ -26,7 +26,7 @@ jQuery.work = {
 					"sServerMethod" : "POST",
 					"bProcessing" : true,
 					"bSort" : false,
-					"sAjaxSource" : $.ace.getContextPath() + "/admin/work/list",
+					"sAjaxSource" : $.ace.getContextPath() + "/admin/worker/list",
 					"fnDrawCallback" : function(oSettings) {
 						$('[rel="popover"],[data-rel="popover"]').popover();
 					},
@@ -34,7 +34,7 @@ jQuery.work = {
 						var name = $("#_name").val();
 						if (!!name) {
 							aoData.push({
-								"name" : "name",
+								"name" : "workername",
 								"value" : name
 							});
 						}
@@ -49,25 +49,27 @@ jQuery.work = {
 						});
 					},
 					"aoColumns" : [{
-						"mDataProp" : "id"
+						"mDataProp" : "username"
 					}, {
-						"mDataProp" : "user.name"
+						"mDataProp" : "name"
 					},{
-						"mDataProp" : "workdate"
+						"mDataProp" : "tel"
+					}, {
+						"mDataProp" : "address"
 					},{
-						"mDataProp" : "cash"
+						"mDataProp" : "email"
 					},{
-						"mDataProp" : "unit"
+						"mDataProp" : "grade"
 					},{
-						"mDataProp" : "school"
+						"mDataProp" : "createDate"
 					},{
 						"mDataProp" : ""
 					}],
 					"aoColumnDefs" : [
 						{
-							'aTargets' : [6],
+							'aTargets' : [7],
 							'fnRender' : function(oObj, sVal) {
-								return" <button class=\"btn2 btn-info\" onclick=\"$.work.showEdit("+oObj.aData.id+")\"><i class=\"icon-edit\"></i> 修改</button>  <button class=\"btn2 btn-info\" onclick=\"$.work.deleteUser("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
+								return" <button class=\"btn2 btn-info\" onclick=\"$.adminWorker.showEdit("+oObj.aData.id+")\"><i class=\"icon-edit\"></i> 修改</button>  <button class=\"btn2 btn-info\" onclick=\"$.adminWorker.deleteWorker("+oObj.aData.id+")\"><i class=\"icon-trash\"></i> 删除</button>";
 							}
 						},
 					 {
@@ -78,23 +80,23 @@ jQuery.work = {
 
 				});
 			} else {
-				var oSettings = this.userDataTable.fnSettings();
+				var oSettings = this.workerDataTable.fnSettings();
 				oSettings._iDisplayStart = 0;
-				this.userDataTable.fnDraw(oSettings);
+				this.workerDataTable.fnDraw(oSettings);
 			}
 
 		},
-		deleteUser :function(id){
+		deleteWorker :function(id){
 			bootbox.confirm( "是否确认删除？", function (result) {
 	            if(result){
 	            	$.ajax({
 	        			type : "get",
-	        			url : $.ace.getContextPath() + "/admin/work/delete/"+id,
+	        			url : $.ace.getContextPath() + "/admin/worker/delete/"+id,
 	        			dataType : "json",
 	        			success : function(json) {
 	        				if(json.state=='success'){
 	        					noty({"text":""+ json.msg +"","layout":"top","type":"success","timeout":"2000"});
-	        					$.work.initSearchDataTable();
+	        					$.adminWorker.initSearchDataTable();
 	        				}else{
 	        					noty({"text":""+ json.resultMap.msg +"","layout":"top","type":"warning"});
 	        				}
@@ -103,7 +105,7 @@ jQuery.work = {
 	            }
 	        });
 		},
-		showUserAddModal: function(id){
+		showWorkerAddModal: function(id){
 			$("#id").val(id);
 			$('#_modal').modal({
 			});
@@ -113,16 +115,17 @@ jQuery.work = {
 			$("#id").val(id);
 			$.ajax({
     			type : "get",
-    			url : $.ace.getContextPath() + "/admin/work/get/"+id,
+    			url : $.ace.getContextPath() + "/admin/worker/get/"+id,
     			dataType : "json",
     			success : function(json) {
     				if(json.state=='success'){
     					$("#name").val(json.object.name);
-    					$("#school").val(json.object.school);
-    					$("#unit").val(json.object.unit);
-    					$("#cash").val(json.object.cash);
-    					$("#workdate").val(json.object.workdate);
-    					$("#remark").val(json.object.remark);
+    					$("#username").val(json.object.username);
+    					$("#password").val(json.object.password);
+    					$("#tel").val(json.object.tel);
+    					$("#email").val(json.object.email);
+    					$("#address").val(json.object.address);
+    					$("#grade").val(json.object.grade);
     				}else{
     					noty({"text":""+ json.msg +"","layout":"top","type":"warning"});
     				}
@@ -131,17 +134,17 @@ jQuery.work = {
 			$("#_modal").modal('show');
 		},
 		
-		saveUser: function(id){
+		saveWorker: function(id){
 			$.ajax({
     			type : "post",
-    			url : $.ace.getContextPath() + "/admin/work/save",
+    			url : $.ace.getContextPath() + "/admin/worker/save",
     			data:$("form").serialize(),
     			dataType : "json",
     			success : function(json) {
     				if(json.state=='success'){
     					$("#_modal").modal('hide');
     					noty({"text":""+ json.msg +"","layout":"top","type":"success","timeout":"2000"});
-    					$.work.initSearchDataTable();
+    					$.adminWorker.initSearchDataTable();
     				}else{
     					noty({"text":""+ json.msg +"","layout":"top","type":"warning"});
     				}

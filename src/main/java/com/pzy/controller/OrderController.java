@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -29,7 +32,10 @@ public class OrderController {
 	public String index(Model model) {
       		return "admin/order/index";
 	}
-	
+	@RequestMapping("report")
+	public String report(Model model) {
+      		return "admin/order/report";
+	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> list(
@@ -40,6 +46,31 @@ public class OrderController {
 		int pageNumber = (int) (iDisplayStart / iDisplayLength) + 1;
 		int pageSize = iDisplayLength;
 		Page<Order> orders = orderService.findAll(pageNumber, pageSize, name);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("aaData", orders.getContent());
+		map.put("iTotalRecords", orders.getTotalElements());
+		map.put("iTotalDisplayRecords", orders.getTotalElements());
+		map.put("sEcho", sEcho);
+		return map;
+	}
+	@RequestMapping(value = "/listreport", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> list(
+			@RequestParam(value = "sEcho", defaultValue = "1") int sEcho,
+			@RequestParam(value = "iDisplayStart", defaultValue = "0") int iDisplayStart,
+			@RequestParam(value = "iDisplayLength", defaultValue = "10") int iDisplayLength, 
+			String name,
+			String start,
+			String end,
+			String state
+			
+			) throws ParseException {
+		int pageNumber = (int) (iDisplayStart / iDisplayLength) + 1;
+		int pageSize = iDisplayLength;
+		Date s=StringUtils.isNotBlank(start)?DateUtils.parseDate(start, "yyyy-MM-dd"):null;
+		Date e=StringUtils.isNotBlank(end)?DateUtils.parseDate(end, "yyyy-MM-dd"):null;
+		
+		Page<Order> orders = orderService.findAll(pageNumber, pageSize, name,s,e,state);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("aaData", orders.getContent());
 		map.put("iTotalRecords", orders.getTotalElements());

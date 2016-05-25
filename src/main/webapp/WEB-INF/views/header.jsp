@@ -29,7 +29,7 @@
 
               //-->
               <p class="contacts"><i class="fa fa-phone"></i> 001-888888 </p>
-              <p class="contacts"><i class="fa fa-envelope"></i> <a href="">8888888@qq.com</a></p>
+              <p class="contacts"><i class="fa fa-envelope"></i> <a href="">263608237@qq.com</a></p>
               <ul class="social-btns">
                   <c:if test="${sessionScope.user!=null}">
                     <li style=" width: 250px;"><a href="center">欢迎您：${sessionScope.user.name }</a></li>
@@ -66,7 +66,7 @@
                 <a href="index.html">
                 <div class="envor-logo">
                   <img src="img/site-logo.png" alt="Envor Logo">
-                  <p class="logo" style="width: 330px;">家务事我帮您！</p>
+                  <p class="logo" style="width: 330px;">家政服务网！</p>
                 <!--
 
                 Site Logo end
@@ -85,7 +85,7 @@
                       <a href="index">首页</a>
                     </li>
                     <li>
-                      <a href="project">在线预约</a>
+                      <a href="project">在线下单</a>
                     </li>
                       <li>
                       <a href="center">个人中心</a>
